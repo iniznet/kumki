@@ -2067,10 +2067,10 @@
                     "php bin/mahout-devtools hooks:generate --source=fixtures/hooks/source --output=fixtures/hooks/hooks.md"
                 ],
                 "i18n:check": [
-                    "php bin/mahout-devtools i18n:check --domain=kumki --source=fixtures/i18n/source --output=fixtures/i18n/kumki.pot"
+                    "php bin/mahout-devtools i18n:check --domain=howdah --source=fixtures/i18n/source --output=fixtures/i18n/howdah.pot"
                 ],
                 "i18n:generate": [
-                    "php bin/mahout-devtools i18n:generate --domain=kumki --source=fixtures/i18n/source --output=fixtures/i18n/kumki.pot"
+                    "php bin/mahout-devtools i18n:generate --domain=howdah --source=fixtures/i18n/source --output=fixtures/i18n/howdah.pot"
                 ],
                 "doctor": [
                     "php bin/mahout-devtools doctor"

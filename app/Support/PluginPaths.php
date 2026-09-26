@@ -4,7 +4,7 @@
  * This installation's own paths and URLs, named once from the main plugin file.
  *
  * `plugin_dir_url()` resolves a URL from a *file*, not a directory, and a provider
-> that reaches for `dirname(__DIR__, 2)` gets one level right and the other wrong.
+ * > that reaches for `dirname(__DIR__, 2)` gets one level right and the other wrong.
  * The composition root has the only correct answer — the file core loaded — so it
  * registers it here and every path or URL in this plugin is derived from that one
  * value.
@@ -45,6 +45,16 @@ final readonly class PluginPaths
     public function path(string $relative): string
     {
         return $this->directory().'/'.ltrim($relative, '/');
+    }
+
+    /**
+     * One file inside this installation, addressed as a URL. The package's stylesheet
+     * is served from here, and only this object can name it: `plugin_dir_url()` takes
+     * the main plugin file, which nothing else holds.
+     */
+    public function url(string $relative): string
+    {
+        return \rtrim(\plugin_dir_url($this->file), '/\\').'/'.\ltrim($relative, '/\\');
     }
 
     /**

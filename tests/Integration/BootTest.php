@@ -53,7 +53,8 @@ final class BootTest extends \WP_UnitTestCase
         \Iniznet\Mahout\Kernel\Kernel::inWordPress(self::class);
     }
 
-    public function testTheDeclaredPathsPointAtThisInstallation(): void {
+    public function testTheDeclaredPathsPointAtThisInstallation(): void
+    {
         $paths = Bootstrap::services()->get(\Iniznet\Kumki\Support\PluginPaths::class);
 
         self::assertSame('kumki.php', basename($paths->file()), 'the main file is the one core loaded, whatever the separator of the machine that loaded it.');

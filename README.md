@@ -41,6 +41,25 @@ cp tests/wp-tests-config.php.dist tests/wp-tests-config.php
 | `config/entries.php` | the Vite entry list |
 | `uninstall.php` | the deletion policy, which is deliberately not a guess |
 
+## The worked example
+
+`Offices` is the feature this starter exists to demonstrate. Read it in this order,
+because each file answers a different question a new host asks.
+
+| File | The question it answers |
+|---|---|
+| `config/content-types.php` | why a plugin rather than a theme: a post type declared here survives switching the theme |
+| `config/fields.php` | when a field is `Meta` and when it is `Table` — the same group carries both, plus a queried repeater, and the file says why each one is where it is |
+| `app/Features/Offices/OfficesRepository.php` | the read path: `FieldReader::prime()` filed before mapping, the two-phase filtered read, and the aggregate that saturates at its ceiling |
+| `app/Features/Offices/OfficeMapper.php` + `OfficeData.php` | where a `WP_Post` stops existing and a typed value starts |
+| `app/Features/Offices/OfficesModule.php` | how a feature declares its collaborators by contract id and never reaches for a container |
+| `app/Providers/EditorProvider.php` | the field seam: panels and screens read from config, bound under the package's contracts, groups registered on the package's own hook |
+| `tests/Integration/OfficesTest.php` | the claims above, executed — including the one that says where the prime stops working |
+
+Delete the two config entries and the feature stops existing: nothing else in the
+starter refers to it except the module line in `app/Bootstrap.php`. That is the test of
+whether the example is a worked example or a fixture.
+
 ## Gates
 
 ```bash

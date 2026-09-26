@@ -8,6 +8,7 @@ use Iniznet\Kumki\Exception\InvalidContentDeclaration;
 use Iniznet\Kumki\Support\Hooks;
 use Iniznet\Kumki\Support\PluginPaths;
 use Iniznet\Mahout\Content\Contracts\Registrar;
+use Iniznet\Mahout\Content\PostReader;
 use Iniznet\Mahout\Content\PostType;
 use Iniznet\Mahout\Content\RestRoute;
 use Iniznet\Mahout\Content\Taxonomy;
@@ -20,8 +21,8 @@ use Iniznet\Mahout\Kernel\Contracts\ServiceProvider;
  * declarative list; nothing is registered at file scope and nothing is discovered.
  *
  * This is the provider the theme has no equivalent of, because it is where the
- * boundary between the two hosts actually falls: a post type declared here survives
- * a theme switch, and one declared in a theme does not.
+ * boundary between the two hosts actually falls: a post type declared here survives a
+ * theme switch, and one declared in a theme does not.
  */
 final class ContentProvider implements ServiceProvider
 {
@@ -30,6 +31,12 @@ final class ContentProvider implements ServiceProvider
 
     public function register(Container $container): void
     {
+        // Declared in register(), not boot(): a feature's module resolves its collaborators
+        // during its own register pass, and the kernel's order is providers register,
+        // modules register, providers boot, modules boot. A service declared in a boot
+        // pass is invisible to every module in the process.
+        $container->set(new PostReader());
+
         $declarations = require $container->get(PluginPaths::class)->path('config/content-types.php');
 
         if (!\is_array($declarations)) {

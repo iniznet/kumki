@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace Iniznet\Kumki;
 
 use Iniznet\Kumki\Exception\NotBooted;
+use Iniznet\Kumki\Features\Offices\OfficesModule;
 use Iniznet\Kumki\Providers\AdminProvider;
 use Iniznet\Kumki\Providers\AssetsProvider;
 use Iniznet\Kumki\Providers\ContentProvider;
@@ -63,6 +64,10 @@ final class Bootstrap
         $kernel->provider(ContentProvider::class);
         $kernel->provider(EditorProvider::class);
         $kernel->provider(AdminProvider::class);
+
+        // A module boots after every provider, so it can resolve the contracts its
+        // feature reads by id. The worked example lives in app/Features/Offices.
+        $kernel->module(OfficesModule::class);
 
         $kernel->boot();
 

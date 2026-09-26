@@ -49,7 +49,6 @@
         "format:check": "php-cs-fixer fix --dry-run --diff",
         "stan": "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G",
         "psalm": "psalm --taint-analysis --no-cache",
-        "arch": "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G",
         "rector": "rector --dry-run --no-progress-bar",
         "test": "php vendor/bin/phpunit -c phpunit.xml.dist",
         "hooks:check": "php vendor/bin/mahout-devtools hooks:check --source=app --output=docs/reference/hooks.md",
@@ -67,8 +66,8 @@
             "@test",
             "@hooks:check",
             "@i18n:check",
-            "@config:check",
-            "@doctor"
+            "@doctor",
+            "@config:check"
         ]
     },
     "scripts-descriptions": {
