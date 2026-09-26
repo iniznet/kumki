@@ -1,0 +1,14 @@
+/*
+ * The plugin's own custom properties, scoped to what this host renders.
+ *
+ * A plugin has no theme.json: that file is read from a theme by core, so the design
+ * tokens a block needs are declared here in the host's own scope and never in a
+ * global selector. A block that needs a colour reads it from the theme's tokens when
+ * one exists and carries a fallback when the theme declares none — the layer that
+ * exists is not a dependency (law 6).
+ */
+
+:root {
+    --kumki-plugin-gap: 1rem;
+    --kumki-plugin-rule: 1px solid currentColor;
+}

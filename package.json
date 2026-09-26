@@ -1,0 +1,13 @@
+{
+    "name": "kumki",
+    "private": true,
+    "type": "module",
+    "license": "GPL-2.0-or-later",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "vite": "^7.0.0"
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "name": "iniznet/kumki",
+    "description": "A mahout starter plugin.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "keywords": [
+        "wordpress",
+        "mahout",
+        "plugin",
+        "kumki"
+    ],
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/iniznet/mahout-kernel.git" },
+        { "type": "vcs", "url": "https://github.com/iniznet/mahout-assets.git" },
+        { "type": "vcs", "url": "https://github.com/iniznet/mahout-content.git" },
+        { "type": "vcs", "url": "https://github.com/iniznet/mahout-fields.git" },
+        { "type": "vcs", "url": "https://github.com/iniznet/mahout-db.git" }
+    ],
+    "require": {
+        "php": ">=8.4",
+        "composer": "^2.5",
+        "iniznet/mahout-kernel": "^1.0",
+        "iniznet/mahout-assets": "^1.0",
+        "iniznet/mahout-content": "^1.0",
+        "iniznet/mahout-fields": "^1.0",
+        "iniznet/mahout-db": "^1.0"
+    },
+    "require-dev": {
+        "iniznet/mahout-devtools": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iniznet\\Kumki\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Iniznet\\Kumki\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "classmap-authoritative": true,
+        "allow-plugins": {}
+    },
+    "scripts": {
+        "format": "php-cs-fixer fix",
+        "format:check": "php-cs-fixer fix --dry-run --diff",
+        "stan": "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G",
+        "psalm": "psalm --taint-analysis --no-cache",
+        "arch": "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G",
+        "rector": "rector --dry-run --no-progress-bar",
+        "test": "php vendor/bin/phpunit -c phpunit.xml.dist",
+        "hooks:check": "php vendor/bin/mahout-devtools hooks:check --source=app --output=docs/reference/hooks.md",
+        "hooks:generate": "php vendor/bin/mahout-devtools hooks:generate --source=app --output=docs/reference/hooks.md",
+        "i18n:check": "php vendor/bin/mahout-devtools i18n:check --domain=kumki --source=app --output=languages/kumki.pot",
+        "i18n:generate": "php vendor/bin/mahout-devtools i18n:generate --domain=kumki --source=app --output=languages/kumki.pot",
+        "doctor": "php vendor/bin/mahout-devtools doctor",
+        "config:check": "php vendor/bin/mahout-devtools config:check",
+        "check": [
+            "@format:check",
+            "@stan",
+            "@psalm",
+            "@arch",
+            "@rector",
+            "@test",
+            "@hooks:check",
+            "@i18n:check",
+            "@config:check",
+            "@doctor"
+        ]
+    },
+    "scripts-descriptions": {
+        "format": "Normalize the code base with the shared PHP-CS-Fixer rules.",
+        "stan": "Run PHPStan at maximum severity with no baseline.",
+        "psalm": "Run Psalm's taint analysis.",
+        "arch": "Run the shared architecture rules.",
+        "rector": "Preview the shared Rector policy.",
+        "test": "Run the PHPUnit suite against the WordPress test library.",
+        "hooks:check": "Fail when the generated hook reference is stale.",
+        "i18n:check": "Fail when the generated POT is stale.",
+        "doctor": "Assert the installation assembly and the capacity prerequisites.",
+        "config:check": "Assert the divergence rules and the artifact set.",
+        "check": "Every gate, in order."
+    }
+}
