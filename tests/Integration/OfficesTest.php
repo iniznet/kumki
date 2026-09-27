@@ -37,6 +37,16 @@ final class OfficesTest extends \WP_UnitTestCase
         parent::setUp();
 
         $this->services = \Iniznet\Kumki\Bootstrap::services();
+
+        // The two field tables are created by a migration, which puts them outside the
+        // transaction core wraps every case in: rows from one case are still there for
+        // the next. The package's own helper empties them, because the alternative - a
+        // number no other case uses, repeated in each - passes for the wrong reason the
+        // day somebody adds a sixth case to this file.
+        (new \Iniznet\Mahout\Fields\TestSupport\FieldTables(
+            $this->services->get(\Iniznet\Mahout\Db\Contracts\SqlConnection::class),
+        ))->reset();
+
         $this->offices = $this->services->get(OfficesRepository::class);
     }
 
@@ -121,20 +131,20 @@ final class OfficesTest extends \WP_UnitTestCase
         self::assertSame(1, $this->primeStatements($before), 'the value table is read once for the whole page.');
         self::assertSame(\count($page->offices), \count($seen), 'no row is mapped twice.');
 
-        // And here is the stated boundary of that prime, asserted rather than
-        // described: scalar rows are filed for the page, repeater leaves are not,
-        // because the rows an object owns in a group are the editor's to decide and
-        // no derived ceiling exists for them (mahout-fields ADR-0011). A listing that
-        // shows a repeater therefore still costs one read per object per group, and a
-        // developer who wants a page of them should read that sentence before adding a
-        // queried repeater to a card.
+        // And the boundary moved where a declaration made it movable. This group
+        // declares expectedMaxItems, the writer enforces it, and so the ceiling is
+        // derivable and one statement brings home every contact on the page. A
+        // repeater that declares no bound is still one read per object per group
+        // (mahout-fields ADR-0011): the sentence worth reading before adding a
+        // queried repeater to a card is not "repeaters cost per object" but "declare
+        // a bound or pay per object", and the number below is which one this card is.
         self::assertSame(
-            \count($page->offices),
+            1,
             $this->leafStatements($before),
-            'one leaves read per office on the page: the prime covers scalars, not repeaters.',
+            'one leaves read for the whole page, because office_contacts declares its bound.',
         );
         self::assertLessThanOrEqual(
-            2 + 2 * \count($page->offices),
+            2 + \count($page->offices),
             $used,
             sprintf('the page cost %d statements: %s', $used, \implode(' | ', $this->lastQueries($before))),
         );
@@ -162,12 +172,8 @@ final class OfficesTest extends \WP_UnitTestCase
 
     public function testTheAggregateSaturatesAtItsCeilingInsteadOfScanning(): void
     {
-        // A seat value no other case uses, so the count is this case's own: the
-        // aggregate's bound is the assertion, and a polluted range would make it
-        // unprovable.
-        // A seat value no other case in this file uses, so the count is this case's
-        // own: the aggregate's bound is the assertion, and an overlapping range would
-        // make it unprovable rather than merely larger.
+        // The tables are emptied for every case, so this count is this case's rows and
+        // nothing else's: the aggregate's bound is the assertion.
         foreach (range(0, 4) as $row) {
             $this->office('Saturated '.$row, 'summary', 777000 + $row);
         }

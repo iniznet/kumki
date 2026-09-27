@@ -54,7 +54,7 @@ because each file answers a different question a new host asks.
 | `app/Features/Offices/OfficeMapper.php` + `OfficeData.php` | where a `WP_Post` stops existing and a typed value starts |
 | `app/Features/Offices/OfficesModule.php` | how a feature declares its collaborators by contract id and never reaches for a container |
 | `app/Providers/EditorProvider.php` | the field seam: panels and screens read from config, bound under the package's contracts, groups registered on the package's own hook |
-| `tests/Integration/OfficesTest.php` | the claims above, executed — including the one that says where the prime stops working |
+| `tests/Integration/OfficesTest.php` | the claims above, executed — including the boundary a declaration moves: a repeater that states its maximum is primed with the rest of the page, and one that states nothing pays per object |
 
 Delete the two config entries and the feature stops existing: nothing else in the
 starter refers to it except the module line in `app/Bootstrap.php`. That is the test of
@@ -71,6 +71,15 @@ installation around this plugin as well as its own assembly, and it fails when a
 host on the same site also carries the packages: one process has one composition root
 (mahout-kernel ADR-0007), so a theme that installs the family and a plugin that installs
 the family are alternative assemblies, not two layers of one site.
+
+One finding is a date rather than a defect. `config:check` reports that the family is
+locked to a path repository, and it is right to: the lock this working copy resolves is
+produced by `composer.dev.json`, whose repositories are directories on this machine, and
+a committed lock must resolve over a committed repository. The lock cannot be produced
+until the packages carry their first `1.0` tags, because the manifests require `^1.0`
+over VCS and no such ref exists yet. So: develop with `COMPOSER=composer.dev.json`, never
+commit the lock that resolves, and expect this one line to go away at the first tag —
+which is also the moment the generated starters become installable.
 
 ## Choosing between this and the theme starter
 

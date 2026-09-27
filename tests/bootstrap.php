@@ -58,15 +58,70 @@ tests_add_filter(
         require_once dirname(__DIR__).'/kumki.php';
 
         // The tables come from the same migrations a live activation runs: a test
-        // suite is a first install.
+        // suite is a first install. Which means the ledger has to be empty first - it
+        // is the one migration artefact that outlives the session, since the tables the
+        // suite creates are temporary and the row recording them is not. Leave it and
+        // the second run of this file believes its own schema is already in place and
+        // creates nothing.
+        // A test suite is a first install, so the artefacts the migrations create are
+        // removed with the ledger that records them. The two belong together: leave the
+        // ledger and the next run believes its schema is in place and creates nothing,
+        // leave the tables and the next run meets CREATE TABLE with something already
+        // there. Neither failure is about the code under test, and both read as SQL.
+        $connection = Iniznet\Kumki\Bootstrap::services()->get(Iniznet\Mahout\Db\Contracts\SqlConnection::class);
+        $prefix = $connection->prefix();
+        $collate = $connection->charsetCollate();
+
+        foreach ([
+            Iniznet\Mahout\Db\MigrationLedgerSchema::table($prefix, $collate),
+            Iniznet\Mahout\Fields\FieldValuesTable::table($prefix, $collate),
+            Iniznet\Mahout\Fields\FieldLeavesTable::table($prefix, $collate),
+        ] as $table) {
+            $GLOBALS['wpdb']->query('DROP TABLE IF EXISTS '.$table->name->quoted());
+        }
+
         Iniznet\Kumki\Bootstrap::services()
             ->get(Iniznet\Mahout\Db\MigrationRunner::class)
             ->migrate();
+
+        // Then check the claim. A migration runner reads a ledger row as proof that a
+        // schema artefact exists, and a ledger that outlives the tables it describes -
+        // which one suite can do to another sharing one test database - makes it
+        // conclude that everything is already in place and create nothing. The failure
+        // then surfaces three queries later as "table doesn't exist", in a test that
+        // never mentioned a migration. This is where that fact belongs.
+        $prefix = $connection->prefix();
+        $collate = $connection->charsetCollate();
+        $missing = [];
+
+        foreach ([
+            Iniznet\Mahout\Fields\FieldValuesTable::table($prefix, $collate),
+            Iniznet\Mahout\Fields\FieldLeavesTable::table($prefix, $collate),
+        ] as $table) {
+            $name = $table->name->value;
+
+            if (null === $GLOBALS['wpdb']->get_var('SHOW TABLES LIKE \''.$name.'\'')) {
+                $missing[] = $name;
+            }
+        }
+
+        if ([] !== $missing) {
+            fwrite(STDERR, sprintf(
+                'The migration reported success and created none of: %s.%sThe migrations ledger (%s) claims they exist. Delete that table - it is a claim about artefacts that are not there - or drop the test database, and run again.%s',
+                implode(', ', $missing),
+                PHP_EOL,
+                $prefix.'mahout_migrations',
+                PHP_EOL,
+            ));
+
+            exit(1);
+        }
     }
 );
 
-// Core's installer is a subprocess that prints its progress. The buffer is
-// discarded so nothing is sent before PHPUnit starts.
+// Core's installer prints its progress, and the suite is quieter for discarding it:
+// the boot above now says plainly what it could not do, which is the only thing a
+// developer reading this file needs to see.
 \ob_start();
 require_once $testsDir.'/includes/bootstrap.php';
 \ob_end_clean();
