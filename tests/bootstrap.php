@@ -73,7 +73,11 @@ tests_add_filter(
         $collate = $connection->charsetCollate();
 
         foreach ([
-            Iniznet\Mahout\Db\MigrationLedgerSchema::table($prefix, $collate),
+            Iniznet\Mahout\Db\MigrationLedgerSchema::table(
+                $prefix,
+                Iniznet\Mahout\Kernel\RuntimeIdentity::fromSlug(Iniznet\Kumki\Bootstrap::IDENTITY),
+                $collate,
+            ),
             Iniznet\Mahout\Fields\FieldValuesTable::table($prefix, $collate),
             Iniznet\Mahout\Fields\FieldLeavesTable::table($prefix, $collate),
         ] as $table) {
@@ -110,7 +114,7 @@ tests_add_filter(
                 'The migration reported success and created none of: %s.%sThe migrations ledger (%s) claims they exist. Delete that table - it is a claim about artefacts that are not there - or drop the test database, and run again.%s',
                 implode(', ', $missing),
                 PHP_EOL,
-                $prefix.'mahout_migrations',
+                Iniznet\Mahout\Db\MigrationLedgerSchema::nameFor($prefix, Iniznet\Mahout\Kernel\RuntimeIdentity::fromSlug(Iniznet\Kumki\Bootstrap::IDENTITY))->value,
                 PHP_EOL,
             ));
 

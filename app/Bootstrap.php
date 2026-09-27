@@ -32,9 +32,19 @@ use Iniznet\Mahout\Db\MigrationRunner;
 use Iniznet\Mahout\Fields\FieldsProvider;
 use Iniznet\Mahout\Kernel\Container;
 use Iniznet\Mahout\Kernel\Kernel;
+use Iniznet\Mahout\Kernel\RuntimeIdentity;
 
 final class Bootstrap
 {
+    /**
+     * The identity this host claims for every name the packages mint into the
+     * site — its ledger table, its option rows. One declaration, read here and by
+     * the test bootstrap, because a second mahout system on the same site must not
+     * share either, and a name with no host in it claims the whole site
+     * implicitly.
+     */
+    public const string IDENTITY = 'kumki';
+
     private static ?Kernel $kernel = null;
 
     /**
@@ -49,6 +59,10 @@ final class Bootstrap
     public static function run(string $pluginFile): void
     {
         $kernel = Kernel::inWordPress(self::class);
+
+        // Declared before any provider registers: DbProvider refuses to name the
+        // schema it owns without it, and there is no default to fall back to.
+        $kernel->service(RuntimeIdentity::fromSlug(self::IDENTITY), id: RuntimeIdentity::class);
 
         // The main plugin file is the only thing that can name this installation's
         // own URLs: core's plugin_dir_url() takes a file, not a directory, so the
