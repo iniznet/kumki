@@ -71,17 +71,27 @@ tests_add_filter(
         $connection = Iniznet\Kumki\Bootstrap::services()->get(Iniznet\Mahout\Db\Contracts\SqlConnection::class);
         $prefix = $connection->prefix();
         $collate = $connection->charsetCollate();
+        $identity = Iniznet\Mahout\Kernel\RuntimeIdentity::fromClass(Iniznet\Kumki\Bootstrap::class);
+
+        // Both ledger names: the unsuffixed one predates identities, and
+        // LegacyNameAdoption moves it onto the declared one inside the run below.
+        // Clearing only the current name would let that adoption carry a stale
+        // history into a suite that expects an empty ledger.
+        $GLOBALS['wpdb']->query(
+            'DROP TABLE IF EXISTS '.Iniznet\Mahout\Db\Identifier::prefixed($prefix, 'mahout_migrations')->quoted(),
+        );
 
         foreach ([
-            Iniznet\Mahout\Db\MigrationLedgerSchema::table(
-                $prefix,
-                Iniznet\Mahout\Kernel\RuntimeIdentity::fromSlug(Iniznet\Kumki\Bootstrap::IDENTITY),
-                $collate,
-            ),
+            Iniznet\Mahout\Db\MigrationLedgerSchema::table($prefix, $identity, $collate),
             Iniznet\Mahout\Fields\FieldValuesTable::table($prefix, $collate),
             Iniznet\Mahout\Fields\FieldLeavesTable::table($prefix, $collate),
         ] as $table) {
             $GLOBALS['wpdb']->query('DROP TABLE IF EXISTS '.$table->name->quoted());
+        }
+
+        foreach (['db_schema_version', 'db_search_index', 'db_sweep_cursors'] as $suffix) {
+            \delete_option($identity->namespacedName($suffix));
+            \delete_option('mahout_'.$suffix);
         }
 
         Iniznet\Kumki\Bootstrap::services()
@@ -96,9 +106,15 @@ tests_add_filter(
         // never mentioned a migration. This is where that fact belongs.
         $prefix = $connection->prefix();
         $collate = $connection->charsetCollate();
+        $identity = Iniznet\Mahout\Kernel\RuntimeIdentity::fromClass(Iniznet\Kumki\Bootstrap::class);
         $missing = [];
 
         foreach ([
+            // Both ledger names: the unsuffixed one predates identities, and
+            // LegacyNameAdoption moves it onto the declared one inside the run
+            // below. Clearing only the current name would let that adoption carry a
+            // stale history into a suite that expects an empty ledger.
+            $prefix.'mahout_migrations',
             Iniznet\Mahout\Fields\FieldValuesTable::table($prefix, $collate),
             Iniznet\Mahout\Fields\FieldLeavesTable::table($prefix, $collate),
         ] as $table) {
@@ -114,7 +130,7 @@ tests_add_filter(
                 'The migration reported success and created none of: %s.%sThe migrations ledger (%s) claims they exist. Delete that table - it is a claim about artefacts that are not there - or drop the test database, and run again.%s',
                 implode(', ', $missing),
                 PHP_EOL,
-                Iniznet\Mahout\Db\MigrationLedgerSchema::nameFor($prefix, Iniznet\Mahout\Kernel\RuntimeIdentity::fromSlug(Iniznet\Kumki\Bootstrap::IDENTITY))->value,
+                Iniznet\Mahout\Db\MigrationLedgerSchema::nameFor($prefix, Iniznet\Mahout\Kernel\RuntimeIdentity::fromClass(Iniznet\Kumki\Bootstrap::class))->value,
                 PHP_EOL,
             ));
 
