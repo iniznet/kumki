@@ -14,7 +14,8 @@
         { "type": "vcs", "url": "https://github.com/iniznet/mahout-assets.git" },
         { "type": "vcs", "url": "https://github.com/iniznet/mahout-content.git" },
         { "type": "vcs", "url": "https://github.com/iniznet/mahout-fields.git" },
-        { "type": "vcs", "url": "https://github.com/iniznet/mahout-db.git" }
+        { "type": "vcs", "url": "https://github.com/iniznet/mahout-db.git" },
+        { "type": "vcs", "url": "https://github.com/iniznet/mahout-devtools.git" }
     ],
     "require": {
         "php": ">=8.4",

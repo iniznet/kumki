@@ -4,8 +4,531 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4cc141b1fa5baa38507c558f87eb7706",
+    "content-hash": "da03b7bb540063db55a9d30695ec7a70",
     "packages": [
+        {
+            "name": "iniznet/mahout-assets",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:iniznet/mahout-assets.git",
+                "reference": "639d82da2fe9c761b651387e208aafc288b1be6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iniznet/mahout-assets/zipball/639d82da2fe9c761b651387e208aafc288b1be6d",
+                "reference": "639d82da2fe9c761b651387e208aafc288b1be6d",
+                "shasum": ""
+            },
+            "require": {
+                "iniznet/mahout-kernel": "^1.0",
+                "php": ">=8.4"
+            },
+            "require-dev": {
+                "iniznet/mahout-devtools": "^1.0"
+            },
+            "bin": [
+                "bin/mahout-assets-budget"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Assets\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Assets\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "format": [
+                    "php-cs-fixer fix"
+                ],
+                "format:check": [
+                    "php-cs-fixer fix --dry-run --diff"
+                ],
+                "stan": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "psalm": [
+                    "psalm --taint-analysis --no-cache"
+                ],
+                "arch": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "rector": [
+                    "rector --dry-run --no-progress-bar"
+                ],
+                "test": [
+                    "php vendor/bin/phpunit -c phpunit.xml.dist"
+                ],
+                "budget:check": [
+                    "php bin/mahout-assets-budget --manifest=fixtures/budget/within/manifest.json --root=fixtures/budget/within --budget=fixtures/budget/budget.json"
+                ],
+                "hooks:check": [
+                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
+                ],
+                "hooks:generate": [
+                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
+                ],
+                "i18n:check": [
+                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-assets --source=src --output=languages/mahout-assets.pot"
+                ],
+                "i18n:generate": [
+                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-assets --source=src --output=languages/mahout-assets.pot"
+                ],
+                "doctor": [
+                    "php vendor/bin/mahout-devtools doctor"
+                ],
+                "config:check": [
+                    "php vendor/bin/mahout-devtools config:check"
+                ],
+                "check": [
+                    "@format:check",
+                    "@stan",
+                    "@psalm",
+                    "@rector",
+                    "@test",
+                    "@budget:check",
+                    "@hooks:check",
+                    "@i18n:check",
+                    "@doctor",
+                    "@config:check"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Build manifest to styles and script modules, with an explicit entry context, for the mahout family.",
+            "keywords": [
+                "assets",
+                "mahout",
+                "script-modules",
+                "vite",
+                "wordpress"
+            ],
+            "time": "2026-09-28T08:10:22+00:00"
+        },
+        {
+            "name": "iniznet/mahout-content",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:iniznet/mahout-content.git",
+                "reference": "260d79146e8718d46fa02a6118a481f4dd5ba121"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iniznet/mahout-content/zipball/260d79146e8718d46fa02a6118a481f4dd5ba121",
+                "reference": "260d79146e8718d46fa02a6118a481f4dd5ba121",
+                "shasum": ""
+            },
+            "require": {
+                "iniznet/mahout-kernel": "^1.0",
+                "php": ">=8.4"
+            },
+            "require-dev": {
+                "iniznet/mahout-devtools": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Content\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Content\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "format": [
+                    "php-cs-fixer fix"
+                ],
+                "format:check": [
+                    "php-cs-fixer fix --dry-run --diff"
+                ],
+                "stan": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "psalm": [
+                    "psalm --taint-analysis --no-cache"
+                ],
+                "arch": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "rector": [
+                    "rector --dry-run --no-progress-bar"
+                ],
+                "test": [
+                    "php vendor/bin/phpunit -c phpunit.xml.dist"
+                ],
+                "hooks:check": [
+                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
+                ],
+                "hooks:generate": [
+                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
+                ],
+                "i18n:check": [
+                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-content --source=src --output=languages/mahout-content.pot"
+                ],
+                "i18n:generate": [
+                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-content --source=src --output=languages/mahout-content.pot"
+                ],
+                "doctor": [
+                    "php vendor/bin/mahout-devtools doctor"
+                ],
+                "config:check": [
+                    "php vendor/bin/mahout-devtools config:check"
+                ],
+                "check": [
+                    "@format:check",
+                    "@stan",
+                    "@psalm",
+                    "@rector",
+                    "@test",
+                    "@hooks:check",
+                    "@i18n:check",
+                    "@doctor",
+                    "@config:check"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Declarative post type, taxonomy, rewrite and REST registration for the mahout family.",
+            "keywords": [
+                "content",
+                "mahout",
+                "post-type",
+                "rest",
+                "taxonomy",
+                "wordpress"
+            ],
+            "time": "2026-09-28T08:10:30+00:00"
+        },
+        {
+            "name": "iniznet/mahout-db",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:iniznet/mahout-db.git",
+                "reference": "aa2aa3de3626b272b69ee7431c8ffcd2f4fdb6fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iniznet/mahout-db/zipball/aa2aa3de3626b272b69ee7431c8ffcd2f4fdb6fc",
+                "reference": "aa2aa3de3626b272b69ee7431c8ffcd2f4fdb6fc",
+                "shasum": ""
+            },
+            "require": {
+                "iniznet/mahout-kernel": "^1.0",
+                "php": ">=8.4"
+            },
+            "require-dev": {
+                "iniznet/mahout-devtools": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Db\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Db\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "format": [
+                    "php-cs-fixer fix"
+                ],
+                "format:check": [
+                    "php-cs-fixer fix --dry-run --diff"
+                ],
+                "stan": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "psalm": [
+                    "psalm --taint-analysis --no-cache"
+                ],
+                "arch": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "rector": [
+                    "rector --dry-run --no-progress-bar"
+                ],
+                "test": [
+                    "php vendor/bin/phpunit -c phpunit.xml.dist"
+                ],
+                "hooks:check": [
+                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
+                ],
+                "hooks:generate": [
+                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
+                ],
+                "i18n:check": [
+                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-db --source=src --output=languages/mahout-db.pot"
+                ],
+                "i18n:generate": [
+                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-db --source=src --output=languages/mahout-db.pot"
+                ],
+                "doctor": [
+                    "php vendor/bin/mahout-devtools doctor"
+                ],
+                "config:check": [
+                    "php vendor/bin/mahout-devtools config:check"
+                ],
+                "check": [
+                    "@format:check",
+                    "@stan",
+                    "@psalm",
+                    "@rector",
+                    "@test",
+                    "@hooks:check",
+                    "@i18n:check",
+                    "@doctor",
+                    "@config:check"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Schema objects, explicit DDL, the migration runner and its ledger for the mahout family.",
+            "keywords": [
+                "ddl",
+                "mahout",
+                "migrations",
+                "schema",
+                "wordpress"
+            ],
+            "time": "2026-09-28T07:51:26+00:00"
+        },
+        {
+            "name": "iniznet/mahout-fields",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:iniznet/mahout-fields.git",
+                "reference": "f5522ddab544d340a24ee299a07509a555b6a656"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iniznet/mahout-fields/zipball/f5522ddab544d340a24ee299a07509a555b6a656",
+                "reference": "f5522ddab544d340a24ee299a07509a555b6a656",
+                "shasum": ""
+            },
+            "require": {
+                "iniznet/mahout-content": "^1.0",
+                "iniznet/mahout-db": "^1.0",
+                "iniznet/mahout-kernel": "^1.0",
+                "php": ">=8.4"
+            },
+            "require-dev": {
+                "iniznet/mahout-devtools": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Fields\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Fields\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "format": [
+                    "php-cs-fixer fix"
+                ],
+                "format:check": [
+                    "php-cs-fixer fix --dry-run --diff"
+                ],
+                "stan": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "psalm": [
+                    "psalm --taint-analysis --no-cache"
+                ],
+                "arch": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "rector": [
+                    "rector --dry-run --no-progress-bar"
+                ],
+                "test": [
+                    "php vendor/bin/phpunit -c phpunit.xml.dist"
+                ],
+                "hooks:check": [
+                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
+                ],
+                "hooks:generate": [
+                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
+                ],
+                "i18n:check": [
+                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-fields --source=src --output=languages/mahout-fields.pot"
+                ],
+                "i18n:generate": [
+                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-fields --source=src --output=languages/mahout-fields.pot"
+                ],
+                "doctor": [
+                    "php vendor/bin/mahout-devtools doctor"
+                ],
+                "config:check": [
+                    "php vendor/bin/mahout-devtools config:check"
+                ],
+                "check": [
+                    "@format:check",
+                    "@stan",
+                    "@psalm",
+                    "@rector",
+                    "@test",
+                    "@hooks:check",
+                    "@i18n:check",
+                    "@doctor",
+                    "@config:check"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Field declarations, storage targets, both storage adapters and the repeater codec for the mahout family.",
+            "keywords": [
+                "custom-table",
+                "fields",
+                "mahout",
+                "meta",
+                "repeater",
+                "storage",
+                "wordpress"
+            ],
+            "time": "2026-09-28T07:51:32+00:00"
+        },
+        {
+            "name": "iniznet/mahout-kernel",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:iniznet/mahout-kernel.git",
+                "reference": "1f45b7ff7cd8a2458e3370ac28bfdd833d2e77e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iniznet/mahout-kernel/zipball/1f45b7ff7cd8a2458e3370ac28bfdd833d2e77e8",
+                "reference": "1f45b7ff7cd8a2458e3370ac28bfdd833d2e77e8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4"
+            },
+            "require-dev": {
+                "iniznet/mahout-devtools": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Kernel\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Iniznet\\Mahout\\Kernel\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "format": [
+                    "php-cs-fixer fix"
+                ],
+                "format:check": [
+                    "php-cs-fixer fix --dry-run --diff"
+                ],
+                "stan": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "psalm": [
+                    "psalm --taint-analysis --no-cache"
+                ],
+                "arch": [
+                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
+                ],
+                "rector": [
+                    "rector --dry-run --no-progress-bar"
+                ],
+                "test": [
+                    "php vendor/bin/phpunit -c phpunit.xml.dist"
+                ],
+                "hooks:check": [
+                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
+                ],
+                "hooks:generate": [
+                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
+                ],
+                "i18n:check": [
+                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-kernel --source=src --output=languages/mahout-kernel.pot"
+                ],
+                "i18n:generate": [
+                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-kernel --source=src --output=languages/mahout-kernel.pot"
+                ],
+                "doctor": [
+                    "php vendor/bin/mahout-devtools doctor"
+                ],
+                "config:check": [
+                    "php vendor/bin/mahout-devtools config:check"
+                ],
+                "check": [
+                    "@format:check",
+                    "@stan",
+                    "@psalm",
+                    "@rector",
+                    "@test",
+                    "@hooks:check",
+                    "@i18n:check",
+                    "@doctor",
+                    "@config:check"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Boot order, the explicit container, hook registration, typed configuration and diagnostics for the mahout family.",
+            "keywords": [
+                "container",
+                "diagnostics",
+                "kernel",
+                "mahout",
+                "wordpress"
+            ],
+            "time": "2026-09-28T07:51:08+00:00"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "amphp/amp",
             "version": "v3.1.3",
@@ -857,7 +1380,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering"
                 }
             ],
@@ -1411,7 +1934,7 @@
             ],
             "authors": [
                 {
-                    "name": "Andreas M\u00f6ller",
+                    "name": "Andreas Möller",
                     "email": "am@localheinz.com",
                     "homepage": "https://localheinz.com"
                 }
@@ -1461,7 +1984,7 @@
                     "email": "igor@wiedler.ch"
                 }
             ],
-            "description": "\u00c9v\u00e9nement is a very simple event dispatching library for PHP",
+            "description": "Événement is a very simple event dispatching library for PHP",
             "keywords": [
                 "event-dispatcher",
                 "event-emitter"
@@ -1568,7 +2091,7 @@
             ],
             "authors": [
                 {
-                    "name": "Th\u00e9o FIDRY",
+                    "name": "Théo FIDRY",
                     "email": "theo.fidry@gmail.com"
                 }
             ],
@@ -1670,7 +2193,7 @@
                     "email": "fabien@symfony.com"
                 },
                 {
-                    "name": "Dariusz Rumi\u0144ski",
+                    "name": "Dariusz Rumiński",
                     "email": "dariusz.ruminski@gmail.com"
                 }
             ],
@@ -1694,320 +2217,18 @@
             "time": "2026-09-19T19:04:32+00:00"
         },
         {
-            "name": "iniznet/mahout-assets",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "F:/kerjaan 2/WordPress/libraries/mahout-assets",
-                "reference": "f9313a8a2124a181972e1455c7fa2095378a6fd2"
-            },
-            "require": {
-                "iniznet/mahout-kernel": "^1.0",
-                "php": ">=8.4"
-            },
-            "require-dev": {
-                "iniznet/mahout-devtools": "^1.0"
-            },
-            "bin": [
-                "bin/mahout-assets-budget"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Assets\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Assets\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "format": [
-                    "php-cs-fixer fix"
-                ],
-                "format:check": [
-                    "php-cs-fixer fix --dry-run --diff"
-                ],
-                "stan": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "psalm": [
-                    "psalm --taint-analysis --no-cache"
-                ],
-                "arch": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "rector": [
-                    "rector --dry-run --no-progress-bar"
-                ],
-                "test": [
-                    "php vendor/bin/phpunit -c phpunit.xml.dist"
-                ],
-                "budget:check": [
-                    "php bin/mahout-assets-budget --manifest=fixtures/budget/within/manifest.json --root=fixtures/budget/within --budget=fixtures/budget/budget.json"
-                ],
-                "hooks:check": [
-                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
-                ],
-                "hooks:generate": [
-                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
-                ],
-                "i18n:check": [
-                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-assets --source=src --output=languages/mahout-assets.pot"
-                ],
-                "i18n:generate": [
-                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-assets --source=src --output=languages/mahout-assets.pot"
-                ],
-                "doctor": [
-                    "php vendor/bin/mahout-devtools doctor"
-                ],
-                "config:check": [
-                    "php vendor/bin/mahout-devtools config:check"
-                ],
-                "check": [
-                    "@format:check",
-                    "@stan",
-                    "@psalm",
-                    "@arch",
-                    "@rector",
-                    "@test",
-                    "@budget:check",
-                    "@hooks:check",
-                    "@i18n:check",
-                    "@doctor",
-                    "@config:check"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Build manifest to styles and script modules, with an explicit entry context, for the mahout family.",
-            "keywords": [
-                "assets",
-                "mahout",
-                "script-modules",
-                "vite",
-                "wordpress"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
-        },
-        {
-            "name": "iniznet/mahout-content",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "F:/kerjaan 2/WordPress/libraries/mahout-content",
-                "reference": "4fc3a8402f8e7ad412ab89556d98f6c2c22a941c"
-            },
-            "require": {
-                "iniznet/mahout-kernel": "^1.0",
-                "php": ">=8.4"
-            },
-            "require-dev": {
-                "iniznet/mahout-devtools": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Content\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Content\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "format": [
-                    "php-cs-fixer fix"
-                ],
-                "format:check": [
-                    "php-cs-fixer fix --dry-run --diff"
-                ],
-                "stan": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "psalm": [
-                    "psalm --taint-analysis --no-cache"
-                ],
-                "arch": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "rector": [
-                    "rector --dry-run --no-progress-bar"
-                ],
-                "test": [
-                    "php vendor/bin/phpunit -c phpunit.xml.dist"
-                ],
-                "hooks:check": [
-                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
-                ],
-                "hooks:generate": [
-                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
-                ],
-                "i18n:check": [
-                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-content --source=src --output=languages/mahout-content.pot"
-                ],
-                "i18n:generate": [
-                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-content --source=src --output=languages/mahout-content.pot"
-                ],
-                "doctor": [
-                    "php vendor/bin/mahout-devtools doctor"
-                ],
-                "config:check": [
-                    "php vendor/bin/mahout-devtools config:check"
-                ],
-                "check": [
-                    "@format:check",
-                    "@stan",
-                    "@psalm",
-                    "@arch",
-                    "@rector",
-                    "@test",
-                    "@hooks:check",
-                    "@i18n:check",
-                    "@doctor",
-                    "@config:check"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Declarative post type, taxonomy, rewrite and REST registration for the mahout family.",
-            "keywords": [
-                "content",
-                "mahout",
-                "post-type",
-                "rest",
-                "taxonomy",
-                "wordpress"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
-        },
-        {
-            "name": "iniznet/mahout-db",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "F:/kerjaan 2/WordPress/libraries/mahout-db",
-                "reference": "cdd6ac49830e976850b42a35ee3f793d94d43177"
-            },
-            "require": {
-                "iniznet/mahout-kernel": "^1.0",
-                "php": ">=8.4"
-            },
-            "require-dev": {
-                "iniznet/mahout-devtools": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Db\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Db\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "format": [
-                    "php-cs-fixer fix"
-                ],
-                "format:check": [
-                    "php-cs-fixer fix --dry-run --diff"
-                ],
-                "stan": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "psalm": [
-                    "psalm --taint-analysis --no-cache"
-                ],
-                "arch": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "rector": [
-                    "rector --dry-run --no-progress-bar"
-                ],
-                "test": [
-                    "php vendor/bin/phpunit -c phpunit.xml.dist"
-                ],
-                "hooks:check": [
-                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
-                ],
-                "hooks:generate": [
-                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
-                ],
-                "i18n:check": [
-                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-db --source=src --output=languages/mahout-db.pot"
-                ],
-                "i18n:generate": [
-                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-db --source=src --output=languages/mahout-db.pot"
-                ],
-                "doctor": [
-                    "php vendor/bin/mahout-devtools doctor"
-                ],
-                "config:check": [
-                    "php vendor/bin/mahout-devtools config:check"
-                ],
-                "check": [
-                    "@format:check",
-                    "@stan",
-                    "@psalm",
-                    "@arch",
-                    "@rector",
-                    "@test",
-                    "@hooks:check",
-                    "@i18n:check",
-                    "@doctor",
-                    "@config:check"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Schema objects, explicit DDL, the migration runner and its ledger for the mahout family.",
-            "keywords": [
-                "ddl",
-                "mahout",
-                "migrations",
-                "schema",
-                "wordpress"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
-        },
-        {
             "name": "iniznet/mahout-devtools",
-            "version": "dev-main",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:iniznet/mahout-devtools.git",
+                "reference": "387d4c3ae7fa26b26d19b427ac8d6e4c1b5f39d2"
+            },
             "dist": {
-                "type": "path",
-                "url": "F:/kerjaan 2/WordPress/libraries/mahout-devtools",
-                "reference": "dabeefa6983e042e9b788bfaa9e2339386dc2c28"
+                "type": "zip",
+                "url": "https://api.github.com/repos/iniznet/mahout-devtools/zipball/387d4c3ae7fa26b26d19b427ac8d6e4c1b5f39d2",
+                "reference": "387d4c3ae7fa26b26d19b427ac8d6e4c1b5f39d2",
+                "shasum": ""
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^3.64",
@@ -2109,213 +2330,7 @@
                 "tooling",
                 "wordpress"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
-        },
-        {
-            "name": "iniznet/mahout-fields",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "F:/kerjaan 2/WordPress/libraries/mahout-fields",
-                "reference": "c35ed73b7305ae0c48d2faebbf1ed4ff10c21aa7"
-            },
-            "require": {
-                "iniznet/mahout-content": "^1.0",
-                "iniznet/mahout-db": "^1.0",
-                "iniznet/mahout-kernel": "^1.0",
-                "php": ">=8.4"
-            },
-            "require-dev": {
-                "iniznet/mahout-devtools": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Fields\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Fields\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "format": [
-                    "php-cs-fixer fix"
-                ],
-                "format:check": [
-                    "php-cs-fixer fix --dry-run --diff"
-                ],
-                "stan": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "psalm": [
-                    "psalm --taint-analysis --no-cache"
-                ],
-                "arch": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "rector": [
-                    "rector --dry-run --no-progress-bar"
-                ],
-                "test": [
-                    "php vendor/bin/phpunit -c phpunit.xml.dist"
-                ],
-                "hooks:check": [
-                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
-                ],
-                "hooks:generate": [
-                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
-                ],
-                "i18n:check": [
-                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-fields --source=src --output=languages/mahout-fields.pot"
-                ],
-                "i18n:generate": [
-                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-fields --source=src --output=languages/mahout-fields.pot"
-                ],
-                "doctor": [
-                    "php vendor/bin/mahout-devtools doctor"
-                ],
-                "config:check": [
-                    "php vendor/bin/mahout-devtools config:check"
-                ],
-                "check": [
-                    "@format:check",
-                    "@stan",
-                    "@psalm",
-                    "@arch",
-                    "@rector",
-                    "@test",
-                    "@hooks:check",
-                    "@i18n:check",
-                    "@doctor",
-                    "@config:check"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Field declarations, storage targets, both storage adapters and the repeater codec for the mahout family.",
-            "keywords": [
-                "custom-table",
-                "fields",
-                "mahout",
-                "meta",
-                "repeater",
-                "storage",
-                "wordpress"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
-        },
-        {
-            "name": "iniznet/mahout-kernel",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "F:/kerjaan 2/WordPress/libraries/mahout-kernel",
-                "reference": "7c006ea3466e272f495d509518739f8930138f1d"
-            },
-            "require": {
-                "php": ">=8.4"
-            },
-            "require-dev": {
-                "iniznet/mahout-devtools": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Kernel\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Iniznet\\Mahout\\Kernel\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "format": [
-                    "php-cs-fixer fix"
-                ],
-                "format:check": [
-                    "php-cs-fixer fix --dry-run --diff"
-                ],
-                "stan": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "psalm": [
-                    "psalm --taint-analysis --no-cache"
-                ],
-                "arch": [
-                    "phpstan analyse -c phpstan.neon --no-progress --memory-limit=2G"
-                ],
-                "rector": [
-                    "rector --dry-run --no-progress-bar"
-                ],
-                "test": [
-                    "php vendor/bin/phpunit -c phpunit.xml.dist"
-                ],
-                "hooks:check": [
-                    "php vendor/bin/mahout-devtools hooks:check --source=src --output=docs/reference/hooks.md"
-                ],
-                "hooks:generate": [
-                    "php vendor/bin/mahout-devtools hooks:generate --source=src --output=docs/reference/hooks.md"
-                ],
-                "i18n:check": [
-                    "php vendor/bin/mahout-devtools i18n:check --domain=mahout-kernel --source=src --output=languages/mahout-kernel.pot"
-                ],
-                "i18n:generate": [
-                    "php vendor/bin/mahout-devtools i18n:generate --domain=mahout-kernel --source=src --output=languages/mahout-kernel.pot"
-                ],
-                "doctor": [
-                    "php vendor/bin/mahout-devtools doctor"
-                ],
-                "config:check": [
-                    "php vendor/bin/mahout-devtools config:check"
-                ],
-                "check": [
-                    "@format:check",
-                    "@stan",
-                    "@psalm",
-                    "@arch",
-                    "@rector",
-                    "@test",
-                    "@hooks:check",
-                    "@i18n:check",
-                    "@doctor",
-                    "@config:check"
-                ]
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Boot order, the explicit container, hook registration, typed configuration and diagnostics for the mahout family.",
-            "keywords": [
-                "container",
-                "diagnostics",
-                "kernel",
-                "mahout",
-                "wordpress"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
+            "time": "2026-09-28T08:27:22+00:00"
         },
         {
             "name": "kelunik/certificate",
@@ -3097,7 +3112,7 @@
             ],
             "authors": [
                 {
-                    "name": "Ond\u0159ej Mirtes"
+                    "name": "Ondřej Mirtes"
                 },
                 {
                     "name": "Markus Staab"
@@ -3838,7 +3853,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -3914,7 +3929,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -3989,7 +4004,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -4063,7 +4078,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -4141,7 +4156,7 @@
                     "homepage": "https://sorgalla.com/"
                 },
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -4213,7 +4228,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -4288,7 +4303,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -4436,7 +4451,7 @@
                     "email": "ceesjank@gmail.com"
                 },
                 {
-                    "name": "Christian L\u00fcck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering"
                 },
                 {
@@ -7351,22 +7366,15 @@
             "time": "2025-08-10T04:54:36+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "iniznet/mahout-assets": 20,
-        "iniznet/mahout-content": 20,
-        "iniznet/mahout-db": 20,
-        "iniznet/mahout-devtools": 20,
-        "iniznet/mahout-fields": 20,
-        "iniznet/mahout-kernel": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.4"
+        "php": ">=8.4",
+        "composer": "^2.5"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.9.0"
 }
