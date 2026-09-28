@@ -27,7 +27,7 @@
         "iniznet/mahout-db": "^1.0"
     },
     "require-dev": {
-        "iniznet/mahout-devtools": "^1.0"
+        "iniznet/mahout-devtools": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -53,8 +53,8 @@
         "psalm": "psalm --taint-analysis --no-cache",
         "rector": "rector --dry-run --no-progress-bar",
         "test": "php vendor/bin/phpunit -c phpunit.xml.dist",
-        "hooks:check": "php vendor/bin/mahout-devtools hooks:check --source=app --output=docs/reference/hooks.md",
-        "hooks:generate": "php vendor/bin/mahout-devtools hooks:generate --source=app --output=docs/reference/hooks.md",
+        "hooks:check": "php vendor/bin/mahout-devtools hooks:check --source=app --outdir=docs/reference",
+        "hooks:generate": "php vendor/bin/mahout-devtools hooks:generate --source=app --outdir=docs/reference",
         "i18n:check": "php vendor/bin/mahout-devtools i18n:check --domain=kumki --source=app --output=languages/kumki.pot",
         "i18n:generate": "php vendor/bin/mahout-devtools i18n:generate --domain=kumki --source=app --output=languages/kumki.pot",
         "doctor": "php vendor/bin/mahout-devtools doctor",
